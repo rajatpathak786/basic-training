@@ -1,5 +1,5 @@
 function secondLargest(array) {
-   var first = array[0] , second = array[1], dfirst = array[0], dsecond = array[1], largest, secondLargest, n = 0, i = 0;
+   let first = array[0] , second = array[1], dfirst = array[0], dsecond = array[1], largest, secondLargest, n = 0, i = 0;
    while((array.length - 1) > n) {
       if(first > second) {
          largest = first;
