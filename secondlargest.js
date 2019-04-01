@@ -1,40 +1,35 @@
 function secondLargest(array) {
-    let arrlength, largest, first, second, secondlargest;    
-    let i = 0;
-    first = array[i];
-    arrlength = array.length;
-    for(i; i<(arrlength - 1); i++) {        
-        second = array[i + 1];
-        if(first > second) {
-            largest = first;
-            first = largest;
-        }else if(second > first) {
-            largest = second;
-            first = largest;
-        }else {
-            continue;
-        }
-    }
+   var first = array[0] , second = array[1], dfirst = array[0], dsecond = array[1], largest, secondLargest, n = 0, i = 0;
+   while((array.length - 1) > n) {
+      if(first > second) {
+         largest = first;
+         second = array[n + 2];
+         ++n;        
+      } else  {
+          largest = second;
+          first = array[n + 2];
+          ++n;          
+      } 
+   } 
 
-    first = array[i];
-    for(let i = 0; i<(arrlength - 1); i++) {
-        second = array[i + 1];
-        if(largest == array[i]) {
-            continue;
-        }else if(largest == second) {
-            continue;
-        }else {
-            if(first > second) {
-                secondlargest = first;
-                first = secondlargest;
-            }else if(second > first) {
-                secondlargest = second;
-                first = secondlargest;
-            }else {
-                continue;
-            }
-        }        
-    }
+   while ((array.length - 1) > i) {
+      if(array[i] == largest) { 
+         dfirst = (dfirst == largest? array[i+2]: dfirst);
+         dsecond = (dsecond == largest? array[i+2]: dsecond);
+         ++i;
+      } else if(dfirst > dsecond) {          
+          secondLargest = dfirst;
+          dsecond = array[i + 2]; 
+          ++i;       
+      } else {
+          secondLargest = dsecond;
+          dfirst = array[i + 2];
+          ++i;          
+      }
 
-    return secondlargest;
+   } 
+    
+  return secondLargest;
 }
+
+
