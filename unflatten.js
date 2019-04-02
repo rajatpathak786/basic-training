@@ -6,19 +6,16 @@ function unflatten(flatObject) {
     if(count < (array.length - 1)) {
       if(typeof obj1[array[count]] == "object") {
         obj(obj1[array[count]], array, count + 1);
-      }else {
-        obj1[array[count]]={};
-        obj(obj1[array[count]], array, count + 1);
+      } else {
+          obj1[array[count]]={};
+          obj(obj1[array[count]], array, count + 1);
       }
-    }else {
-      obj1[array[count]] = flatObject[key];
+    } else {
+        obj1[array[count]] = flatObject[key];
     }
-
     return obj1;            
     }
-
     obj(temp, array, 0);
   }
-
   return temp;
 }
