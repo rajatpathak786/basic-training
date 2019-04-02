@@ -8,7 +8,7 @@ function secondLargest(array) {
    }
    
    for(let i = 0; i < array.length; i++) {
-       if((array[i] > secondLargest) && (array[i] != largest)) {
+       if(array[i] > secondLargest && array[i] != largest) {
            secondLargest = array[i];
        }
 
