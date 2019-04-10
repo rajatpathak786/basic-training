@@ -5,13 +5,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.text());
 let  category, length, name, quantity, imported, tax = 0, totalPrice = 0, stat, price = 0, v;
 app.post('/', function(req, res, next) {
-  if (req.headers["content-type"]=="text/plain") {
+  if (req.headers["content-type"] == "text/plain") {
     let arry = req.body.split('\n');
     let order = arry[0].split(':');
-    order = order[0];
-    arry.splice(0,1);
+    [order,] = order;                         // same as order = order[0]
+    arry.splice(0, 1);
     let len = arry.length;
-    let ret = tojason(arry,order,len);
+    let ret = tojason(arry, order, len);
     let b = bill(ret);
     res.write(b);
   } else {
@@ -19,8 +19,9 @@ app.post('/', function(req, res, next) {
   }
   res.end("");
 }),
-app.post('/', function(req,res){
+app.post('/', function(req, res){
   if (req.headers["content-type"]=="application/json") {
+    console.log(req.body);
     let b = bill(req.body);
     res.write(b);
   }
@@ -55,9 +56,9 @@ function bill(ret) {
       tax = parseFloat(tax.toFixed(2));
       totalPrice = totalPrice + price;
     }
-    stat = stat + "\n" + ret.items[i].quantity + ' ' + ret.items[i].name + ': ' + price;
+    stat = stat + `\n${ret.items[i].quantity} ${ret.items[i].name}: ${price}`;
   }
-  stat = stat + "\n" + "Sales Taxes: " + tax + "\n" + "Total: " + totalPrice.toFixed(2);
+  stat = stat + `\nSales Taxes: ${tax}\nTotal: ${totalPrice.toFixed(2)}`;
   return stat;
 }
 function tojason(arry, order, len) {  
@@ -72,25 +73,25 @@ function tojason(arry, order, len) {
     name = arr.slice(1, v);
     name = name.join(' ');
     price = arr[length - 1];
-    if (arr.indexOf('imported') > -1) {
+    if (arr.includes('imported')) {
       imported = true;
     } else {
       imported = false;
     }
-    if (arr.indexOf('book') > -1){
+    if (arr.includes('book')){
       category = 'book';
-    } else if (arr.indexOf('chocolate') > -1) {
+    } else if (arr.includes('chocolate')) {
       category = 'food';
-    } else if (arr.indexOf('music') > -1){
+    } else if (arr.includes('music')){
       category = 'music';
-    } else if (arr.indexOf('perfume') > -1) {
+    } else if (arr.includes('perfume')) {
       category = 'perfume';
-    } else if (arr.indexOf('pills') > -1) {
+    } else if (arr.includes('pills')) {
       category = 'medicine';
-    } else if (arr.indexOf('chocolates') > -1) {
+    } else if (arr.includes('chocolates')) {
       category = 'food';
     }
-    ord.items.push ({"name": name ,"category":category,"quantity":quantity,"price":price,"imported":imported});
+    ord.items.push ({"name": name , "category": category, "quantity": quantity, "price": price, "imported": imported});
   }
   return ord;
 }
