@@ -26,7 +26,7 @@ app.post('/', function(req,res) {
     }
 });
 app.listen(2500,"127.0.0.2");
-function bill(ret) {
+let bill = (ret) => {
   stat = ret.name;
   let l = ret.items.length;
   for(let i = 0; i < l; ++i) {
@@ -40,38 +40,37 @@ function bill(ret) {
       price = parseFloat(ret.items[i].price);
       price = parseFloat(price.toFixed(2));
       tax = tax + 0; 
-      totalPrice = totalPrice + price;
-      totalPrice = totalPrice;     
+      totalPrice = parseFloat(totalPrice) + parseFloat(price);   
     } else if (!(ret.items[i].category == "book" || ret.items[i].category == "food" || ret.items[i].category == "medicine") && (ret.items[i].imported == 1)) {
       price = parseFloat(ret.items[i].price) * 0.05 + parseFloat(ret.items[i].price) * 0.1 + parseFloat(ret.items[i].price);
       price = parseFloat(price.toFixed(2));
       tax = tax + price - parseFloat(ret.items[i].price);
       tax = parseFloat(tax.toFixed(2));
-      totalPrice = totalPrice + price;
+      totalPrice = parseFloat(totalPrice) + parseFloat(price); 
     } else if (!(ret.items[i].category == "book" || ret.items[i].category == "food" || ret.items[i].category == "medicine") && (ret.items[i].imported == 0)) {
       price = parseFloat(ret.items[i].price) * 0.1 + parseFloat(ret.items[i].price);
       price = parseFloat(price.toFixed(2));
       tax = tax + price - parseFloat(ret.items[i].price);
       tax = parseFloat(tax.toFixed(2));
-      totalPrice = totalPrice + price;
+      totalPrice = parseFloat(totalPrice) + parseFloat(price); 
     } else if ((ret.items[i].category == "book" || ret.items[i].category == "food" || ret.items[i].category == "medicine")) {
       price = parseFloat(ret.items[i].price);
       price = parseFloat(price.toFixed(2));
       tax = tax + 0; 
-      totalPrice = totalPrice + price;
-      totalPrice = totalPrice;
+      totalPrice = parseFloat(totalPrice) + parseFloat(price); 
     } else {
       price = parseFloat(ret.items[i].price) * 0.1 + parseFloat(ret.items[i].price);
       price = parseFloat(price.toFixed(2));
       tax = tax + price - parseFloat(ret.items[i].price);
       tax = parseFloat(tax.toFixed(2));
+      totalPrice = parseFloat(totalPrice) + parseFloat(price);
     }
     stat = `${stat}<br/>${ret.items[i].quantity} ${ret.items[i].name}: ${price}`;
   }
   stat = `${stat}<br/>Sales Taxes: ${tax}<br/>Total: ${totalPrice.toFixed(2)}`;
   return stat;
 }
-function tojason(arry, order, len) {  
+let tojason = (arry, order, len) => {  
   let ord = {"name":order,
   "items":[]
   };
