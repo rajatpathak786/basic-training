@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const Sequelize = require('sequelize');
 const orderDatabase = require('./models').orderData;
+console.log(orderDatabase);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.text());
@@ -20,7 +20,7 @@ app.post('/', function(req, res, next) {
   let b = bill(ret);
   const obj = toDatabase(order, yourOrder, b.invoice, parseFloat(tax.toFixed(2)), parseFloat(totalPrice.toFixed(2)));
   orderDatabase.create({
-    order: obj.order,
+    ordername: obj.order,
     yourorder: obj.yourOrder,
     invoice: obj.invoice,
     tax: obj.tax,
