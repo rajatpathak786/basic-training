@@ -1,20 +1,31 @@
 const emptable = require('../models').empTable;
 let employeeInsert = (req,res) => {
-  let ret = req.body;
-   emptable.create({
-    empName: ret.name,
-    empEmail: ret.email
+  let obj = req.body;
+  emptable.create({
+    empName: obj.name,
+    empEmail: obj.email
   })
   .then(() => console.log('employee details successfully inserted in emptable'));
-  res.send(ret);
+  res.send(obj);
   res.end();    
 }
 let employeeFetch = (req, res) => {
-  let ret = req.body;
+  res.send('post data in Json format\nname:');
+  res.end();
+}
+let employeeDelete = (req, res) => {
+  console.log(req.query);
+  emptable.destroy({
+    where: {empName: req.query.name}
+  })
+  .then(() => res.status(204).send())
+  .catch((error) => res.status(400).send(error));
+}
+let employeeFetchId = (req, res) => {
+  console.dir(req);
   emptable.findAll({
-    include: [{
-      model: emptable,
-    }],
+    attributes: ['id'],
+    where: {empName: req.query.name}
   })
   .then((emp) => res.status(200).send(emp))
   .catch((error) => { res.status(400).send(error); });
@@ -23,47 +34,24 @@ let employeeGet = (req,res) => {
   res.send('send post request in json format\n name: \nemail:');
   res.end();
 }
+let employeeUpdate = (req, res) => {
+  let obj = req.body;
+  emptable.update(
+    {empName: obj.name},
+    {where: {id: obj.id}}
+  )
+  .then((emp) => res.status(200).send(emp))
+  .catch((error) => { res.status(400).send(error); });
+}
 module.exports = {
   employeeInsert,
+  employeeDelete,
   employeeGet,
-  employeeFetch
+  employeeFetch,
+  employeeFetchId,
+  employeeUpdate
 }
 
 
 
 
-/*add(req, res) {
-  return Role
-    .create({
-      role_name: req.body.role_name,
-    })
-    .then((role) => res.status(201).send(role))
-    .catch((error) => res.status(400).send(error));
-},
-
-addUser(req, res) {
-  return Role
-    .findById(req.body.role_id, {
-      include: [{
-        model: User,
-        as: 'users'
-      }],
-    })
-    .then((role) => {
-      if (!role) {
-        return res.status(404).send({
-          message: 'Role Not Found',
-        });
-      }
-      User.findById(req.body.role_id).then((course) => {
-        if (!course) {
-          return res.status(404).send({
-            message: 'User Not Found',
-          });
-        }
-        role.addUser(course);
-        return res.status(200).send(role);
-      })
-    })
-    .catch((error) => res.status(400).send(error));
-}*/
