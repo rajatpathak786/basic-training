@@ -8,6 +8,7 @@ const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.text());
 router.use(bodyParser.json());
+
 router.get('/employee', employee.employeeGet);
 router.post('/employee', employee.employeeInsert);
 router.get('/employeeFetch', employee.employeeFetch);

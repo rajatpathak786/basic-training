@@ -36,29 +36,27 @@ let sendEmail = async (obj) => {
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 }
 (req,res)=>{
-    if (req.query.name){
-        let nowDate=new Date()
-        emptable.findAll({
-            attributes:['id','empEmail'],
-            where:{
-                name:req.query.name
-            }
-        }).then((empid)=>{
-            emptrainingtable.findAll({
-                attributes:['rId','moduleId','taskId'],
-                where:{
-                    eId:empid[0].id
-                }
-            }).then((modulename) => {
-                moduletable.findAll({
-                    
-                })
-            })
+  if (req.query.name) {
+    let nowDate=new Date()
+    emptable.findAll({
+      attributes:['id','empEmail'],
+      where:{
+        name:req.query.name
+      }
+    }).then((empid)=>{
+      emptrainingtable.findAll({
+        attributes:['rId','moduleId','taskId'],
+        where:{
+          eId:empid[0].id
+        }
+      }).then((modulename) => {
+        moduletable.findAll({
+              
         })
-    }
-
+      })
+  })
 }
-
+}
 sendEmail({sender: 'vkjvivek7@gmail.com',
 receiver:'rajatpathak786@gmail.com',
 subject:'Assignment no. completed',
