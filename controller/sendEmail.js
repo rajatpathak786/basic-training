@@ -35,27 +35,59 @@ let sendEmail = async (obj) => {
   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 }
-(req,res)=>{
+(req,res) => {
+  let obj = {};
   if (req.query.name) {
-    let nowDate=new Date()
+    let nowDate = new Date()
     emptable.findAll({
       attributes:['id','empEmail'],
       where:{
-        name:req.query.name
+        name: req.query.name
       }
-    }).then((empid)=>{
+    })
+    .then((empid)=>{
       emptrainingtable.findAll({
-        attributes:['rId','moduleId','taskId'],
+        attributes:['id','rId','moduleId','taskId'],
         where:{
-          eId:empid[0].id
+          eId: empid[0].id,
+          //taskId: req.id
         }
-      }).then((modulename) => {
-        moduletable.findAll({
-              
-        })
       })
-  })
-}
+      .then((modulename) => {
+        moduletable.findAll({
+          attributes: ['moduleName'],
+          where:{id: modulename[0].moduleId}
+        })
+        .then((taskname) => {
+          tasktable.findAll({
+            attributes: ['taskName'],
+            where:{id: modulename[0].taskId[i]}
+          })
+          .then((reviewmail) => {
+            emptable.findAll({
+              attributes: ['empEmail'],
+              where:{id: modulename[0].rId}
+            })
+            .then((ret) => {
+              emptrainingtable.findAll({
+                attributes: ['expectedDateOfCompletion'],
+                where:{id: modulename[0].id}
+              })
+              .then((doc) => {
+                obj.recEmail = empid[0].empEmail;
+                obj.senEmail = ret[0].empEmail;
+                obj.subject = `Complete ${taskname[0].moduleName} ${reviewmail[0].taskName}`;
+                obj.empName =  req.query.name;
+                obj.moduleName = taskname[0].moduleName;
+                obj.taskName = reviewmail[0].taskName;
+                obj.doc = doc[0].expectedDateOfCompletion;
+              })
+            })            
+          })
+        })        
+      })     
+    })
+  }
 }
 sendEmail({sender: 'vkjvivek7@gmail.com',
 receiver:'rajatpathak786@gmail.com',
@@ -64,3 +96,35 @@ employeeName:'Rajat Pathak',
 moduleName:'Nodejs',
 taskName:'Nodejs task',
 doc:'23/06/2019'})
+
+
+
+/*
+
+var nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'youremail@gmail.com',
+    pass: 'yourpassword'
+  }
+});
+
+var mailOptions = {
+  from: 'youremail@gmail.com',
+  to: 'myfriend@yahoo.com',
+  subject: 'Sending Email using Node.js',
+  text: 'That was easy!'
+};
+
+transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Email sent: ' + info.response);
+  }
+});
+
+
+*/
