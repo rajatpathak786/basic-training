@@ -9,4 +9,4 @@ router.get('/taskFetchId', task.taskFetchId);
 router.get('/taskDelete', task.taskDelete);
 router.post('/taskUpdate', task.taskUpdate);
 
-module.exports = {router};
+module.exports = router;

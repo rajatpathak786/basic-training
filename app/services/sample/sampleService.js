@@ -1,6 +1,5 @@
 import ServiceBase from '../base'
 
-
 const constraints = {
   variable: {
     presence: { allowEmpty: false }

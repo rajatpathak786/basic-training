@@ -8,4 +8,4 @@ router.get('/trelloBoard', empTraining.trelloBoard);
 router.get('/updateDrift', empTraining.updateDriftParams);
 router.post('/updateDrift', empTraining.updateDrift);
 
-module.exports = {router};
+module.exports = router;

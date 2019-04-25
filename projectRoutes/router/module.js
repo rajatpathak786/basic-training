@@ -9,4 +9,4 @@ router.get('/moduleFetchId', modulee.moduleFetchId);
 router.get('/moduleDelete', modulee.moduleDelete);
 router.post('/moduleUpdate', modulee.moduleUpdate);
 
-module.exports = {router};
+module.exports = router;

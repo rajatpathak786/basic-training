@@ -1,3 +1,6 @@
+require('babel-register')({
+    presets: [ 'env' ]
+})
 const express = require('express');
 const app = express();
 const route = require('./projectRoutes/routes');

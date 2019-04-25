@@ -1,0 +1,10 @@
+pkg/
+.git/
+.gitignore
+.gitattributes
+uploads/
+node_modules/
+Basilbuild
+Dockerfile
+.vscode/
+.node-xmlhttprequest-sync-*
