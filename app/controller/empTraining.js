@@ -1,6 +1,9 @@
-const emptrainingtable = require('../models').empTraingTable;
-const moduletable = require('../models').moduleTable;
-const emptable = require('../models').empTable;
+const emptrainingtable = require('../../models').empTraingTable;
+const moduletable = require('../../models').moduleTable;
+const emptable = require('../../models').empTable;
+const tasktable = require('../../models').taskTable;
+const request = require("request");
+const {apiKey, token} = require('./config.js');
 let empTrainingGet = (req, res) => {
   res.send('Send Post in JSON format\neid:\nrid:\nmodulename:\ntaskstatus:');
   res.end();    
@@ -58,8 +61,6 @@ let trelloBoard = (req, res) => {
     where: {empName: req.query.name}
   })
   .then((trello) => {
-    const {apiKey,token}=require('./config.js')
-    var request = require("request");
     let createBoard = (assignmentName) => {
     let options = { method: 'POST',
     url: 'https://api.trello.com/1/boards',
@@ -85,13 +86,118 @@ let trelloBoard = (req, res) => {
     console.log(body);
     emptrainingtable.update (
     {boardId: body.id},
-    {where: {empId: trello.id}} 
+    {where: {empId: trello[0].id}}//empId: trello[0].id moduleId:trello[0].moduleId// empId: trello[0].id moduleId:trello[0].moduleId 
     )
   });
 }
 createBoard('Employee Training');
   })
 }
+let trelloCard = (req, res) => {
+  moduletable.findAll ({
+    attributes: ['id'],
+    where: {
+      moduleName: req.body.modulename
+    }
+  })
+  .then((modulee) => {
+    emptable.findAll ({
+      attributes: ['id'],
+      where: {
+        empName: req.body.empname
+      }
+    })
+    .then((emp) => {
+      tasktable.findAll ({
+        attributes: ['taskName'],
+        where: {
+          id: req.body.taskId
+        }
+      })
+      .then((card) => {
+        let options = {
+          method: 'POST',
+          url: 'https://api.trello.com/1/cards',
+          qs:
+          {
+            name: card[0].taskName,
+            idList: listId,
+            keepFromSource: 'all',
+            key: apiKey,
+            token: token
+          }
+        };
+        request(options, function (error, response, body) {
+          if (error) throw new Error(error);
+          //cardId=body.id database code here.
+          console.log(body);
+          emptrainingtable.update (
+            {cardId: body.id},
+            {where: {
+              empId: emp[0].id,
+              moduleId: modulee[0].moduleId
+            }}//empId: trello[0].id moduleId:trello[0].moduleId// empId: trello[0].id moduleId:trello[0].moduleId 
+            )
+        });
+      })
+    })
+  })
+  
+}
+let trelloList = (req, res) => {
+  moduletable.findAll ({
+    attributes: ['id'],
+    where: {moduleName: req.body.modulename}
+  })
+  .then((modulee) => {
+    emptable.findAll ({
+      attributes: ['id'],
+      where: {empName: req.body.empname}
+    })
+    .then((emp) => {
+      tasktable.findAll ({
+        attributes: ['id'],
+        where: {taskName: req.body.taskname}
+      })
+      .then((task) => {
+        emptrainingtable.findAll ({
+          attributes: ['boardId'],
+          where: {
+            empId: emp[0].id,
+            taskId: task[0].id,
+            moduleId: modulee[0].id
+          }
+        })
+        .then((trellolist) => {
+          var options = {
+            method: 'POST',
+            url: `https://api.trello.com/1/boards/${trellolist[0].boardId}/lists`,
+            qs:
+            {
+              name: req.body.modulename,
+              pos: 'top',
+              key: apiKey,
+              token: token
+            }
+          };
+          var rq = request(options, function (error, response, body) {
+            if (error) throw new Error(error);
+            //listID=body.id database code here
+            emptrainingtable.update (
+              {listId: body.id},
+              {where: {
+                taskId: task[0].id,
+                moduleId: modulee[0].id,
+                empId: emp[0].id
+              }}
+            )
+          })
+        })
+      })
+    })
+  })
+}
+
 let updateDrift = (req, res) => {
   let obj = req.body;
   obj.endDate = new Date();
@@ -139,6 +245,8 @@ module.exports = {
   empTrainingGet,
   empTrainingInsert,
   trelloBoard,
+  trelloCard,
+  trelloList,
   updateDrift,
   updateDriftParams
 }
