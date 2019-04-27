@@ -1,5 +1,5 @@
 import ServiceBase from '../base'
-const tasktable = require('../models').taskTable;
+const tasktable = require('../../../models/tasktable').taskTable;
 const constraints = {
   variable: {
     presence: { allowEmpty: false }

@@ -9,7 +9,7 @@ import employeeGet from '../services/Employee/employeeGet'
 
 export default class Employee {
 
-  static async postEmployeeInsert(req, res) {
+  static async employeeInsert(req, res) {
     const variable = req.body;
     const employeeInsertResult = await employeeInsert.execute(variable)
     if (employeeInsertResult.successful) {
@@ -19,7 +19,7 @@ export default class Employee {
     }
   }
   
-  static async getemployeeDelete(req, res) {
+  static async employeeDelete(req, res) {
     const variable = req.query;
     const employeeDeleteResult = await employeeDelete.execute(variable)
     if (employeeDeleteResult.successful) {
@@ -28,7 +28,7 @@ export default class Employee {
       Responder.operationFailed(res, employeeDeleteResult.error)
     }
   }
-  static async getemployeeFetchId(req, res) {
+  static async employeeFetchId(req, res) {
     const variable = req.query;
     const employeeFetchIdResult = await employeeFetchId.execute(variable)
     if (employeeFetchIdResult.successful) {
@@ -37,7 +37,7 @@ export default class Employee {
       Responder.operationFailed(res, employeeFetchIdResult.error)
     }
   }
-  static async getemployeeUpdate(req, res) {
+  static async employeeUpdate(req, res) {
     const variable = req.body;
     const employeeUpdateResult = await employeeUpdate.execute(variable)
     if (employeeUpdateResult.successful) {
@@ -46,7 +46,7 @@ export default class Employee {
       Responder.operationFailed(res, employeeUpdateResult.error)
     }
   }
-  static async getemployeeFetch(req, res) {
+  static async employeeFetch(req, res) {
     const variable = 'post data in Json format\nname:';
     const employeeFetchResult = await employeeFetch.execute(variable)
     if (employeeFetchResult.successful) {
@@ -55,9 +55,11 @@ export default class Employee {
       Responder.operationFailed(res, employeeFetchResult.error)
     }
   }
-  static async getemployeeGet(req, res) {
+  static async employeeGet(req, res) {
     const variable = 'send post request in json format\n name: \nemail:';
+    console.log(__filename+'              '+variable );
     const employeeGetResult = await employeeGet.execute(variable)
+    console.dir(employeeGetResult)
     if (employeeGetResult.successful) {
       Responder.success(res, { variable })
     } else {
@@ -65,3 +67,5 @@ export default class Employee {
     }
   }
 }
+
+

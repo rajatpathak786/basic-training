@@ -1,6 +1,6 @@
 import winston from 'winston'
 import fs from 'fs'
-import config from '../config/app'
+const config = require('../config/app');
 
 const logDir = 'logs'
 

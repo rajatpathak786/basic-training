@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const modulee = require('../../controller/module');
+import modulee from '../../app/controllers/module'
 
 router.get('/module', modulee.moduleGet);
 router.post('/module', modulee.moduleInsert);

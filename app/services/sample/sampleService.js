@@ -1,4 +1,4 @@
-import ServiceBase from '../base'
+/*import ServiceBase from '../base'
 
 const constraints = {
   variable: {
@@ -26,3 +26,4 @@ export default class SampleService extends ServiceBase {
     }
   }
 }
+*/

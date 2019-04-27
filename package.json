@@ -8,7 +8,7 @@
   "private": true,
   "dependencies": {
     "async": "^2.5.0",
-    "bcrypt": "^2.0.1",
+    "bcrypt": "^3.0.6",
     "bluebird": "^3.5.1",
     "compression": "^1.7.1",
     "convict": "^4.4.1",
@@ -16,16 +16,27 @@
     "express": "^4.16.2",
     "express-list-routes": "^0.1.4",
     "helmet": "^3.9.0",
+    "install": "^0.12.2",
     "lodash": "^4.17.4",
     "method-override": "^2.3.10",
     "morgan": "^1.9.0",
     "multer": "^1.3.0",
+    "node-gyp": "^4.0.0",
+    "node-install": "^2.1.2",
+    "node-modules": "^1.0.1",
+    "node-pre-gyp": "^0.13.0",
     "passport": "^0.4.0",
     "passport-http": "^0.3.0",
     "passport-http-bearer": "^1.0.1",
+    "python": "0.0.4",
+    "rebuild": "^0.1.2",
+    "remove-node-modules": "^1.7.4",
     "request": "^2.83.0",
+    "scrypt-js": "^2.0.4",
+    "sequelize": "^5.7.6",
     "stream-to-buffer": "^0.1.0",
     "validate.js": "^0.12.0",
+    "web3": "^1.0.0-beta.52",
     "winston": "^2.4.4"
   },
   "scripts": {
@@ -37,7 +48,7 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
-    "nodemon": "^1.12.1",
+    "nodemon": "^1.18.11",
     "standard": "^10.0.3"
   }
 }

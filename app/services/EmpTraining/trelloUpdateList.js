@@ -1,7 +1,7 @@
-const emptrainingtable = require('../../../models').empTraingTable;
-const emptable = require('../../../models').empTable;
-const moduletable = require('../../../models').moduleTable;
-const tasktable = require('../../../models').taskTable
+const emptrainingtable = require('../../../models/emptraingtable').empTraingTable;
+const emptable = require('../../../models/emptable').empTable;
+const moduletable = require('../../../models/moduletable').moduleTable;
+const tasktable = require('../../../models/tasktable').taskTable
 const request = require("request");
 const {apiKey, token} = require('./config');
 import ServiceBase from '../base'

@@ -1,4 +1,4 @@
-const emptrainingtable = require('../models').empTraingTable;
+const emptrainingtable = require('../../../models/emptraingtable').empTraingTable;
 import ServiceBase from '../base'
 
 const constraints = {

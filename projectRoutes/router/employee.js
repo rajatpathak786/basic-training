@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const employee = require('../../app/controllers/employee');
+import employee from '../../app/controllers/employee'
 
 router.get('/employee', employee.employeeGet);
 router.post('/employee', employee.employeeInsert);

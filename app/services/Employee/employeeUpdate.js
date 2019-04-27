@@ -1,5 +1,5 @@
 import ServiceBase from '../base'
-const emptable = require('../models').empTable;
+const emptable = require('../../../models/emptable').empTable;
 
 const constraints = {
   variable: {

@@ -7,15 +7,19 @@ const constraints = {
   }
 }
 
-export default class SampleService extends ServiceBase {
+export default class employeeGet extends ServiceBase {
+  
   get constraints () {
     return constraints
   }
 
   async run () {
+    console.log('employeeGet')
+    console.dir(this._errors)
+    console.dir(this._args);
     try {
-
-      return this.variable
+      console.log(__filename+"   "+this.variable);
+      return this._args
 
     } catch (error) {
 

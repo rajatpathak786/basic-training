@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const task = require('../../controller/task');
+import task from '../../app/controllers/task'
 
 router.get('/task', task.taskGet);
 router.post('/task', task.taskInsert);

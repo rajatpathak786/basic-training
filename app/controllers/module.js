@@ -8,7 +8,7 @@ import moduleGet from '../services/Module/moduleGet'
 
 export default class Module {
 
-  static async getmoduleFetchId(req, res) {
+  static async moduleFetchId(req, res) {
     const variable = req.query;
     const moduleFetchIdResult = await moduleFetchId.execute(variable)
     if (moduleFetchIdResult.successful) {
@@ -17,7 +17,7 @@ export default class Module {
       Responder.operationFailed(res, moduleFetchIdResult.error)
     }
   }
-  static async postmoduleInsert(req, res) {
+  static async moduleInsert(req, res) {
     const variable = req.body;
     const moduleInsertResult = await moduleInsert.execute(variable)
     if (moduleInsertResult.successful) {
@@ -26,7 +26,7 @@ export default class Module {
       Responder.operationFailed(res, moduleInsertResult.error)
     }
   }
-  static async getmoduleUpdate(req, res) {
+  static async moduleUpdate(req, res) {
     const variable = req.body
     const moduleUpdateResult = await moduleUpdate.execute(variable)
     if (moduleUpdateResult.successful) {
@@ -35,7 +35,7 @@ export default class Module {
       Responder.operationFailed(res, moduleUpdateResult.error)
     }
   }
-  static async getmoduleDelete(req, res) {
+  static async moduleDelete(req, res) {
     const variable = req.body;
     const moduleDeleteResult = await moduleDelete.execute(variable)
     if (moduleDeleteResult.successful) {
@@ -44,7 +44,7 @@ export default class Module {
       Responder.operationFailed(res, moduleDeleteResult.error)
     }
   }
-  static async getmoduleFetch(req, res) {
+  static async moduleFetch(req, res) {
     const variable = 'Post Json in format: \nmodulename:'
     const moduleFetchResult = await moduleFetch.execute(variable)
     if (moduleFetchResult.successful) {
@@ -53,7 +53,7 @@ export default class Module {
       Responder.operationFailed(res, moduleFetchResult.error)
     }
   }
-  static async getmoduleGet(req, res) {
+  static async moduleGet(req, res) {
     const variable = 'Post Json in format: \n modulename:\n taskId:';
     const moduleGetResult = await moduleGet.execute(variable)
     if (moduleGetResult.successful) {

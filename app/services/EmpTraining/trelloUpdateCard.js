@@ -1,5 +1,5 @@
-const emptrainingtable = require('../../models').empTraingTable;
-const emptable = require('../../models').empTable;
+const emptrainingtable = require('../../../models/emptraingtable').empTraingTable;
+const emptable = require('../../../models/emptable').empTable;
 const request = require("request");
 const {apiKey, token} = require('./config');
 import ServiceBase from '../base'

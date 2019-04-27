@@ -9,9 +9,8 @@ import helmet from 'helmet'
 import routesInitiator from '../routes'
 import registerAuthStrategy from '../app/authStrategies/passport'
 import BadRequestError from '../app/errors/badRequestError'
-import config from '../config/app'
 import path from 'path'
-
+//import config from '../config/app'
 // Initialize express app
 const app = express()
 

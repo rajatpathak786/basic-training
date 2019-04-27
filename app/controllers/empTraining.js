@@ -9,7 +9,7 @@ import updateDriftParams from '../services/EmpTraining/updateDriftParams'
 
 export default class EmpTraining {
 
-  static async postEmpTrainingInsert(req, res) {
+  static async empTrainingInsert(req, res) {
     const variable = req.body;
     variable.date=new Date();
     variable.endDate = new Date();
@@ -21,7 +21,7 @@ export default class EmpTraining {
       Responder.operationFailed(res, empTrainingInsertResult.error)
     }
   }
-  static async postUpdateDrift(req, res) {
+  static async updateDrift(req, res) {
     const variable = req.body;
     variable.endDate = new Date();
     variable.Date = new Date();
@@ -32,7 +32,7 @@ export default class EmpTraining {
       Responder.operationFailed(res, updateDriftResult.error)
     }
   }
-  static async getEmpTrainingGet(req, res) {
+  static async empTrainingGet(req, res) {
     const variable = 'Send Post in JSON format\neid:\nrid:\nmodulename:\ntaskstatus:';
     const empTrainingGetResult = await empTrainingGet.execute(variable)
     if (empTrainingGetResult.successful) {
@@ -41,7 +41,7 @@ export default class EmpTraining {
       Responder.operationFailed(res, empTrainingGetResult.error)
     }
   }
-  static async postTrelloUpdateBoard(req, res) {
+  static async trelloUpdateBoard(req, res) {
     const variable = req.body;
     const trelloUpdateBoardResult = await trelloUpdateBoard.execute(variable)
     if (trelloUpdateBoardResult.successful) {
@@ -50,7 +50,7 @@ export default class EmpTraining {
       Responder.operationFailed(res, trelloUpdateBoardResult.error)
     }
   }
-  static async postTrelloUpdateCard(req, res) {
+  static async trelloUpdateCard(req, res) {
     const variable = req.body;
     const trelloUpdateCardResult = await trelloUpdateCard.execute(variable)
     if (trelloUpdateCardResult.successful) {
@@ -59,7 +59,7 @@ export default class EmpTraining {
       Responder.operationFailed(res, trelloUpdateCardResult.error)
     }
   }
-  static async postTrelloUpdateList(req, res) {
+  static async trelloUpdateList(req, res) {
     const variable = req.body;
     const trelloUpdateListResult = await trelloUpdateList.execute(variable)
     if (trelloUpdateListResult.successful) {
@@ -68,7 +68,7 @@ export default class EmpTraining {
       Responder.operationFailed(res, trelloUpdateListResult.error)
     }
   }
-  static async getUpdateDriftParams(req, res) {
+  static async updateDriftParams(req, res) {
     const variable = 'Send Post in JSON format:\nmoduleId:\ntaskId:\ndrift:\nremTasks:';
     const updateDriftParamsResult = await updateDriftParams.execute(variable)
     if (updateDriftParamsResult.successful) {

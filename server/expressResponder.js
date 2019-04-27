@@ -21,6 +21,7 @@ function sendResponse (res, status, body) {
  */
 Responder.success = (res, message) => {
   message = _.isString(message) ? { message } : message
+  console.log('222222222222222222222222');
   return sendResponse(res, 200, { result: message })
 }
 
