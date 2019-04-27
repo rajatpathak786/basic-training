@@ -77,4 +77,13 @@ export default class EmpTraining {
       Responder.operationFailed(res, updateDriftParamsResult.error)
     }
   }
+  static async updateDriftParams(req, res) {
+    const variable = 'Send Post in JSON format:\nmoduleId:\ntaskId:\ndrift:\nremTasks:';
+    const updateDriftParamsResult = await updateDriftParams.execute(variable)
+    if (updateDriftParamsResult.successful) {
+      Responder.success(res, { variable })
+    } else {
+      Responder.operationFailed(res, updateDriftParamsResult.error)
+    }
+  }
 }

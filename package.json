@@ -28,6 +28,8 @@
     "passport": "^0.4.0",
     "passport-http": "^0.3.0",
     "passport-http-bearer": "^1.0.1",
+    "pg": "^7.10.0",
+    "pg-hstore": "^2.3.2",
     "python": "0.0.4",
     "rebuild": "^0.1.2",
     "remove-node-modules": "^1.7.4",

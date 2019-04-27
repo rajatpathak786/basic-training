@@ -1,17 +1,17 @@
 import ServiceBase from '../base'
 
 
-const constraints = {
+/*const constraints = {
   variable: {
     presence: { allowEmpty: false }
   }
 }
-
+*/
 export default class employeeGet extends ServiceBase {
   
-  get constraints () {
+  /*get constraints () {
     return constraints
-  }
+  }*/
 
   async run () {
     console.log('employeeGet')
@@ -22,6 +22,7 @@ export default class employeeGet extends ServiceBase {
       return this._args
 
     } catch (error) {
+      console.log('errooooooooooooooooooor');
 
       // handle error case
       

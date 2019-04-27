@@ -1,8 +1,8 @@
 import Sequelize from 'sequelize'
 const config = require('../config/app')
-
-const sequelize = new Sequelize(config.get('db.name'), config.get('db.user'), config.get('db.password'), config.get('db.port'), {
+const sequelize = new Sequelize(config.get('db.name'), config.get('db.user'), config.get('db.password'),  {
   host: config.get('db.host'),
+  port: 5432,
   dialect: 'postgres',
   pool: {
     max: 5,
@@ -15,6 +15,7 @@ const sequelize = new Sequelize(config.get('db.name'), config.get('db.user'), co
 sequelize
   .authenticate()
   .then(() => {
+    console.dir(sequelize);
     console.log('Connection has been established successfully.')
   })
   .catch(err => {

@@ -23,6 +23,7 @@ export default class Employee {
     const variable = req.query;
     const employeeDeleteResult = await employeeDelete.execute(variable)
     if (employeeDeleteResult.successful) {
+      
       Responder.success(res, { variable })
     } else {
       Responder.operationFailed(res, employeeDeleteResult.error)
@@ -61,6 +62,7 @@ export default class Employee {
     const employeeGetResult = await employeeGet.execute(variable)
     console.dir(employeeGetResult)
     if (employeeGetResult.successful) {
+      console.dir({ variable });
       Responder.success(res, { variable })
     } else {
       Responder.operationFailed(res, employeeGetResult.error)

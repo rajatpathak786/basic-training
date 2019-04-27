@@ -26,23 +26,28 @@ const config = convict({
     format: String,
     default: '',
     env: 'LOG_LEVEL'
+  },
+  ip: {
+    doc: "The IP address to bind.",
+    format: "ipaddress",
+    default: "127.0.0.1",
+    env: "IP_ADDRESS"
+  },
+  db: {
+    host: {
+      default: "127.0.0.1",
+      env: "DB_HOST"
     },
-    db: {
-      host: "127.0.0.1",
-      name: "mydatabase",
-      password: "123",
-      user: "postgres",
-      port: "5432"
-    }
-
-    /*log_level: {
+    name : "mydatabase",
+    password: "123",
+    user: "postgres"
+  } 
+})
+/*log_level: {
     'info': 0,
     'ok': 1,
     'error': 2
   },*/
- 
-})
-
 /*const database = {
   "development": {
     "username": "postgres",
