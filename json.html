@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>Tax Calculation Page</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>   
+  </head>
+  <body>
+      <script type = "text/javascript">
+        function submitform(){
+          console.dir(document.getElementById('textJson').value)
+          var setting = {  
+            "async": true,
+            "crossDomain": true,
+            "url": "http://127.0.0.2:3000/",
+            "method": "POST",
+            "headers": {
+              "Content-Type": "application/json",
+              "cache-control": "no-cache",
+            },
+            "data": document.getElementById('textJson').value
+          }
+          $.ajax(setting).done(function (response) {
+            document.getElementById('data').innerHTML = `${response}`;
+          });
+        }
+     </script>
+      Json: <textarea rows = "30" cols = "50" form = "form" id = "textJson" ></textarea>
+      <button onclick = "submitform()">Get Bill</button>
+    <p id = 'data'></p>
+  </body>   
+</html>
